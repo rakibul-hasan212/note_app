@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "9542344535",
+    "project_id": "note-app-ff981",
+    "storage_bucket": "note-app-ff981.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9542344535:android:db91c9c6b716fc5d15e812",
+        "android_client_info": {
+          "package_name": "com.example.counting"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdOphbBWSTNvIF5p6iiQzSTsNy6uSpb70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9542344535:android:78d320c039a8870215e812",
+        "android_client_info": {
+          "package_name": "com.example.firebase_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdOphbBWSTNvIF5p6iiQzSTsNy6uSpb70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
