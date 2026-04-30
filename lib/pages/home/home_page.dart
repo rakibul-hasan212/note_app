@@ -1,14 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_project/controller/auth/auth_controller.dart';
 import 'package:firebase_project/core/colors/app_colors.dart';
 import 'package:firebase_project/pages/update/update_note_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../Add note page/add_note_page.dart';
 
 class HomePage extends StatelessWidget{
 
   HomePage({super.key});
-
+  final AuthController controller = Get.put(AuthController());
   final dbRef = FirebaseFirestore.instance.collection('Users');
 
   @override
@@ -20,6 +22,16 @@ class HomePage extends StatelessWidget{
         title: Text("Note Book",style: TextStyle(color: AppColors.textPrimary,fontSize: 28,fontWeight: FontWeight.w800),),
         centerTitle: true,
         toolbarHeight: 60,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: InkWell(
+                onTap:(){
+                  controller.logout();
+                },  
+                child: Icon(Icons.logout_outlined,size: 28, color: Colors.white,)),
+          )
+        ],
       ),
       body: StreamBuilder(
           stream: dbRef.snapshots(),
@@ -63,6 +75,7 @@ class HomePage extends StatelessWidget{
           }),
       floatingActionButton: FloatingActionButton(
           onPressed: () async{
+            //Update Later
             await Navigator.push(context,
                 MaterialPageRoute(builder: (_)=> AddNotePage()));
           }, child: Icon(Icons.add),

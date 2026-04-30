@@ -58,14 +58,11 @@ class AuthController extends GetxController {
   // logout auth method
   Future<void> logout() async {
     try{
-      loading.value = true;
       await auth.signOut();
       SuccessSnackBar("Logout");
       Get.offAllNamed(Routes.Login);
     }catch(e) {
       ErrorSnackBar(e.toString());
-    }finally{
-      loading.value = false;
     }
   }
 
