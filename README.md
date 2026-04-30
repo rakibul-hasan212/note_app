@@ -5,3 +5,8 @@ A real-time Notes Application built with **Flutter** and **Firebase**, allowing 
 Each user has their own private notes, ensuring data security and proper organization. The application is powered by **GetX** for efficient state management, navigation, and clean architecture.
 
 This app is highly useful in real-life for managing daily tasks, study notes, reminders, and quick ideas. It demonstrates modern mobile app development practices with a scalable and responsive design, making it a strong foundation for adding advanced features like search, categories, and notifications.
+
+## Agamikal inshallah ja ja korbo
+* login and signup authentication part add korbo
+* AddNote and UpdateNote modify korbo
+* Splash page er comment out korbo
