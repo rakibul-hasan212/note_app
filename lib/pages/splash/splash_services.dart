@@ -11,15 +11,21 @@ void startApp() async{
 
   //Splash screen er delay
   await Future.delayed(Duration(seconds: 2));
+  //current user logged in or logged out tar value get kore page Navigate korbe
+  // authController.firebaseUser.listen((user) {
+  //   if (user != null) {
+  //     // that means user login already so go to HomePage()
+  //     Get.offAll(() => HomePage());
+  //   } else {
+  //     //that means user have to login first, so go to LoginPage()
+  //     Get.offAll(() => LoginPage());
+  //   }
+  // });
 
-  //current user logged in or logged out tar value get
   final user = authController.firebaseUser.value;
-
   if(user != null){
-    // that means user login already so go to HomePage()
     Get.offAll(()=> HomePage());//push.Replacement er kaj kore Get.offAll()
   }else{
-    //that means user have to login first, so go to LoginPage()
     Get.offAll(()=> LoginPage());
   }
 }

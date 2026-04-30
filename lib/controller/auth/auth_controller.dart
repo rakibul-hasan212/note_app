@@ -3,6 +3,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_project/pages/Home/home_page.dart';
 import 'package:firebase_project/pages/login/login_page.dart';
+import 'package:firebase_project/widgets/ErrorMassage/error_snackbar.dart';
+import 'package:firebase_project/widgets/SuccessSnackBar/success_snackbar.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
@@ -29,9 +32,10 @@ class AuthController extends GetxController {
         email: email,
         password: password,
       );
+      SuccessSnackBar("Sign Up");
       Get.offAll(()=> LoginPage());
     }catch(e) {
-      print(e.toString());//add showSnackbar later
+      ErrorSnackBar(e.toString());
     }finally{
       loading.value = false;
     }
@@ -45,9 +49,10 @@ class AuthController extends GetxController {
         email: email,
         password: password,
       );
+      SuccessSnackBar("Login");
       Get.offAll(()=> HomePage());
     }catch(e) {
-      print(e.toString());//later perform showSnackbar here
+      ErrorSnackBar(e.toString());
     }finally{
       loading.value = false;
     }
@@ -58,9 +63,10 @@ class AuthController extends GetxController {
     try{
       loading.value = true;
       await auth.signOut();
+      SuccessSnackBar("Logout");
       Get.offAll(()=> LoginPage());
     }catch(e) {
-      print(e.toString()); // perform showSnackbar later
+      ErrorSnackBar(e.toString());
     }finally{
       loading.value = false;
     }
@@ -71,9 +77,10 @@ class AuthController extends GetxController {
     try{
       loading.value = false;
       await auth.sendPasswordResetEmail(email: email);
+      SuccessSnackBar("Reset Password");
       Get.offAll(()=> LoginPage());
     }catch(e) {
-      print(e.toString()); // perform showSnackbar here
+      ErrorSnackBar(e.toString());
     }finally{
       loading.value = false;
     }
