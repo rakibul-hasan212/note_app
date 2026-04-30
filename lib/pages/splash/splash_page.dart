@@ -1,15 +1,10 @@
 
-import 'dart:async';
-import 'package:firebase_project/controller/auth/auth_controller.dart';
-import 'package:firebase_project/pages/Home/home_page.dart';
-import 'package:firebase_project/pages/login/login_page.dart';
 import 'package:firebase_project/pages/splash/splash_services.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../core/colors/app_colors.dart';
 
 class SplashPage extends StatefulWidget{
-  SplashPage({super.key});
+  const SplashPage({super.key});
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -19,10 +14,10 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    //startApp(); //After completing the login and signup auth then comment out this method
-    Timer(Duration(seconds: 2), (){
-      Navigator.push(context, MaterialPageRoute(builder: (_)=> LoginPage()));
-    });
+    startApp(); //After completing the login and signup auth then comment out this method
+    // Timer(Duration(seconds: 2), (){
+    //   Navigator.push(context, MaterialPageRoute(builder: (_)=> LoginPage()));
+    // });
   }
   @override
   Widget build(BuildContext context) {
