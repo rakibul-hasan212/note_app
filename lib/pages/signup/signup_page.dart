@@ -1,11 +1,17 @@
-
+import 'package:firebase_project/controller/auth/auth_controller.dart';
 import 'package:firebase_project/pages/login/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../core/colors/app_colors.dart';
 
-class SignUpPage extends StatelessWidget{
-  const SignUpPage({super.key});
+class SignUpPage extends StatelessWidget {
+  SignUpPage({super.key});
+
+  final AuthController controller = Get.put(AuthController());
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController userName = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +24,19 @@ class SignUpPage extends StatelessWidget{
           children: [
             CircleAvatar(
               radius: 40,
-              child: Icon(Icons.login_sharp,size: 40,),
+              child: Icon(Icons.login_sharp, size: 40,),
             ),
             SizedBox(height: 10,),
-            Text("Welcome To SignUp!!",style: TextStyle(color: AppColors.textPrimary, fontSize: 28, fontWeight: FontWeight.w800),),
-            SizedBox(height:40,),
+            Text("Welcome To SignUp!!", style: TextStyle(
+                color: AppColors.textPrimary,
+                fontSize: 28,
+                fontWeight: FontWeight.w800),),
+            SizedBox(height: 40,),
             Form(
                 child: Column(
                   children: [
                     TextFormField(
-                      controller: TextEditingController(),
+                      controller: userName,
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                         labelText: "User-Name",
@@ -40,7 +49,7 @@ class SignUpPage extends StatelessWidget{
                     ),
                     SizedBox(height: 10,),
                     TextFormField(
-                      controller: TextEditingController(),
+                      controller: email,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         labelText: "Email",
@@ -53,7 +62,7 @@ class SignUpPage extends StatelessWidget{
                     ),
                     SizedBox(height: 10,),
                     TextFormField(
-                      controller: TextEditingController(),
+                      controller: password,
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
                       decoration: InputDecoration(
@@ -85,11 +94,19 @@ class SignUpPage extends StatelessWidget{
                 )
             ),
             SizedBox(height: 20,),
-            ElevatedButton(
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (_)=> LoginPage()));
-                },
-                child: Text("Sign Up", style: TextStyle(color: AppColors.textPrimary, fontSize: 20, fontWeight: FontWeight.w600),)),
+            Obx(() {
+              return ElevatedButton(
+                  onPressed: () {
+                    //Add currentState().validation later
+                    controller.signUp(email.text, password.text);
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (_) => LoginPage()));
+                  },
+                  child: Text("Sign Up", style: TextStyle(
+                      color: AppColors.textPrimary,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600),));
+            }),
           ],
         ),
       ),
