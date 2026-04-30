@@ -1,11 +1,16 @@
 
+import 'package:firebase_project/controller/auth/auth_controller.dart';
 import 'package:firebase_project/core/colors/app_colors.dart';
 import 'package:firebase_project/pages/Home/home_page.dart';
 import 'package:firebase_project/pages/signup/signup_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget{
-  const LoginPage({super.key});
+  LoginPage({super.key});
+  final AuthController controller = Get.put(AuthController());
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +32,7 @@ class LoginPage extends StatelessWidget{
                 child: Column(
                   children: [
                     TextFormField(
-                      controller: TextEditingController(),
+                      controller: email,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         labelText: "Email",
@@ -40,7 +45,7 @@ class LoginPage extends StatelessWidget{
                     ),
                     SizedBox(height: 10,),
                     TextFormField(
-                      controller: TextEditingController(),
+                      controller: password,
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
                       decoration: InputDecoration(
@@ -78,11 +83,15 @@ class LoginPage extends StatelessWidget{
               ],
             ),
             SizedBox(height: 20,),
-            ElevatedButton(
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (_)=> HomePage()));
-                },
-                child: Text("Login", style: TextStyle(color: AppColors.textPrimary, fontSize: 20, fontWeight: FontWeight.w600),)),
+            Obx(() {
+              return ElevatedButton(
+                  onPressed: (){
+                    //Add currentState().validated later
+                    controller.login(email.text, password.text);
+                    //Navigator.push(context, MaterialPageRoute(builder: (_)=> HomePage()));
+                  },
+                  child: Text("Login", style: TextStyle(color: AppColors.textPrimary, fontSize: 20, fontWeight: FontWeight.w600),));
+            }),
             SizedBox(height: 10,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
