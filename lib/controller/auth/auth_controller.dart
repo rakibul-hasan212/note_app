@@ -29,7 +29,7 @@ class AuthController extends GetxController {
         email: email,
         password: password,
       );
-      Get.offAll(LoginPage());
+      Get.offAll(()=> LoginPage());
     }catch(e) {
       print(e.toString());//add showSnackbar later
     }finally{
@@ -45,7 +45,7 @@ class AuthController extends GetxController {
         email: email,
         password: password,
       );
-      Get.offAll(HomePage());
+      Get.offAll(()=> HomePage());
     }catch(e) {
       print(e.toString());//later perform showSnackbar here
     }finally{
@@ -58,7 +58,7 @@ class AuthController extends GetxController {
     try{
       loading.value = true;
       await auth.signOut();
-      Get.offAll(LoginPage());
+      Get.offAll(()=> LoginPage());
     }catch(e) {
       print(e.toString()); // perform showSnackbar later
     }finally{
@@ -71,7 +71,7 @@ class AuthController extends GetxController {
     try{
       loading.value = false;
       await auth.sendPasswordResetEmail(email: email);
-      Get.offAll(LoginPage());
+      Get.offAll(()=> LoginPage());
     }catch(e) {
       print(e.toString()); // perform showSnackbar here
     }finally{

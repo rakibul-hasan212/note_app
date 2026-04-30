@@ -96,13 +96,13 @@ class SignUpPage extends StatelessWidget {
             SizedBox(height: 20,),
             Obx(() {
               return ElevatedButton(
-                  onPressed: () {
+                  onPressed: controller.loading.value? null
+                      : () {
                     //Add currentState().validation later
                     controller.signUp(email.text, password.text);
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (_) => LoginPage()));
                   },
-                  child: Text("Sign Up", style: TextStyle(
+                  child: controller.loading.value? Center(child: CircularProgressIndicator(),)
+                      : Text("Sign Up", style: TextStyle(
                       color: AppColors.textPrimary,
                       fontSize: 20,
                       fontWeight: FontWeight.w600),));

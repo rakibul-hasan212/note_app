@@ -14,10 +14,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    startApp(); //After completing the login and signup auth then comment out this method
-    // Timer(Duration(seconds: 2), (){
-    //   Navigator.push(context, MaterialPageRoute(builder: (_)=> LoginPage()));
-    // });
+    startApp(); //perform splash delayed and Navigate the page
   }
   @override
   Widget build(BuildContext context) {
