@@ -9,7 +9,7 @@ class NoteController extends GetxController {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   // AuthController access
-  final AuthController authController = Get.find();
+  final AuthController authController = Get.put(AuthController());
 
   //reactive note list
   var noteList = <NoteModel>[].obs;
@@ -45,7 +45,6 @@ class NoteController extends GetxController {
       title: title,
       subTitle: subTitle,
     );
-
     await noteRef.doc(id).set(note.toMap());
   }
 
