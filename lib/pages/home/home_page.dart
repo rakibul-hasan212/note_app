@@ -67,14 +67,17 @@ class HomePage extends StatelessWidget{
                 return ListView.builder(
                     itemCount: note.length,
                     itemBuilder: (context, index){
-                      var item = note[index];
+                      var noteItem = note[index];
                       return Card(
                         child: ListTile(
-                          title: Text(item.title),
-                          subtitle: Text(item.subTitle),
+                          onTap: (){
+                            Get.to(()=> UpdateNotePage(note: noteItem));
+                          },
+                          title: Text(noteItem.title),
+                          subtitle: Text(noteItem.subTitle),
                           trailing: IconButton(
                               onPressed: () async{
-                                await noteController.deleteNote(item.id);
+                                await noteController.deleteNote(noteItem.id);
                               },
                               icon: Icon(Icons.delete)
                           )
