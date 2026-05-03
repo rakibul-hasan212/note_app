@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 class ForgetPasswordPage extends StatelessWidget{
   ForgetPasswordPage({super.key});
   TextEditingController emailCont = TextEditingController();
-  final authController = Get.put(AuthController());
+  final AuthController authController = Get.find();
+  final GlobalKey<FormState> formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -16,23 +17,41 @@ class ForgetPasswordPage extends StatelessWidget{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            TextFormField(
-              controller: emailCont,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                label: Text("Email"),
-                hintText: "Enter your register email",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16)
-                ),
-                prefixIcon: Icon(Icons.email_outlined)
+            Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: emailCont,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      label: Text("Email"),
+                      hintText: "Enter your register email",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16)
+                      ),
+                      prefixIcon: Icon(Icons.email_outlined)
+                    ),
+                    validator: (value){
+                      if(value == null || value.isEmpty){
+                        return "Give the email";
+                      }
+                      if(!value.contains("@")){
+                        return "Give the register email accurately";
+                      }
+                      return null;
+                    },
+                  ),
+                ],
               ),
             ),
             SizedBox(height: 20,),
             Obx(() {
               return ElevatedButton(
                   onPressed: authController.loading.value ? null : () async{
-                    await authController.resetPassword(emailCont.text);
+                    if(formKey.currentState!.validate()){
+                      await authController.resetPassword(emailCont.text);
+                    }
                   },
                   child: authController.loading.value ? Center(child: CircularProgressIndicator(),)
                       : Text("Reset Password")

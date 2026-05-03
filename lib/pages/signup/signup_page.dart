@@ -8,7 +8,7 @@ import '../../core/colors/app_colors.dart';
 class SignUpPage extends StatelessWidget {
   SignUpPage({super.key});
 
-  final AuthController controller = Get.put(AuthController());
+  final AuthController controller = Get.find();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController userName = TextEditingController();

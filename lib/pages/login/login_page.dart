@@ -103,8 +103,6 @@ class LoginPage extends StatelessWidget{
                   InkWell(
                       onTap: (){
                         Get.to(ForgetPasswordPage());
-                        //Navigator.push(context, MaterialPageRoute(builder: (_)=> ForgetPasswordPage()));
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Forget password perform successful")));
                       },
                       child: Text("Forget Password?",style: TextStyle(color: Colors.orange, fontWeight: FontWeight.w600),))
                 ],

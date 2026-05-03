@@ -69,7 +69,7 @@ class AuthController extends GetxController {
   // ResetPassword using current mail
   Future<void> resetPassword(String email) async {
     try{
-      loading.value = false;
+      loading.value = true;
       await auth.sendPasswordResetEmail(email: email);
       SuccessSnackBar("Reset Password");
       Get.offAllNamed(Routes.Login);
