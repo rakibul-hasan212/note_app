@@ -38,57 +38,57 @@ class HomePage extends StatelessWidget{
           )
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Padding(
-              padding: EdgeInsets.all(10),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.search_outlined),
-                  hintText: "Search Note",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16)
-                  )
-                ),
-                onChanged: (value){
-                  //update later
-                },
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            TextFormField(
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search_outlined),
+                hintText: "Search Note",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16)
+                )
               ),
-          ),
+              onChanged: (value){
+                //update later
+              },
+            ),
+            SizedBox(height: 10,),
+            Expanded(
+                child: Obx(() {
+                  var note = noteController.noteList;
 
-          Expanded(
-              child: Obx(() {
-                var note = noteController.noteList;
+                  if(note.isEmpty){
+                    return Center(child: Text("No Notes available"),);
+                  }
+                  return ListView.builder(
+                      itemCount: note.length,
+                      itemBuilder: (context, index){
+                        var noteItem = note[index];
+                        return Card(
+                          child: ListTile(
+                            onTap: (){
+                              Get.to(()=> UpdateNotePage(note: noteItem));
+                            },
+                            title: Text(noteItem.title),
+                            subtitle: Text(noteItem.subTitle),
+                            trailing: IconButton(
+                                onPressed: () async{
+                                  await noteController.deleteNote(noteItem.id);
+                                },
+                                icon: Icon(Icons.delete)
+                            )
+                          ),
+                        );
+                      });
+                })
+            )
 
-                if(note.isEmpty){
-                  return Center(child: Text("No Notes available"),);
-                }
-                return ListView.builder(
-                    itemCount: note.length,
-                    itemBuilder: (context, index){
-                      var noteItem = note[index];
-                      return Card(
-                        child: ListTile(
-                          onTap: (){
-                            Get.to(()=> UpdateNotePage(note: noteItem));
-                          },
-                          title: Text(noteItem.title),
-                          subtitle: Text(noteItem.subTitle),
-                          trailing: IconButton(
-                              onPressed: () async{
-                                await noteController.deleteNote(noteItem.id);
-                              },
-                              icon: Icon(Icons.delete)
-                          )
-                        ),
-                      );
-                    });
-              })
-          )
+          ],
 
-        ],
-        
+        ),
       ),
 
       floatingActionButton: FloatingActionButton(

@@ -23,7 +23,7 @@ class AddNotePage extends StatelessWidget{
         toolbarHeight: 60,
       ),
       body: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+        padding:  EdgeInsets.symmetric(horizontal: 20,vertical: 40),
         child: NoteWidgets(
 
             titleCntlr: titleController,

@@ -25,18 +25,21 @@ class UpdateNotePage extends StatelessWidget{
         centerTitle: true,
         toolbarHeight: 60,
       ),
-      body: NoteWidgets(
-          titleCntlr: title,
-          subTitleCntlr: subTitle,
-          buttonText: "Update Note",
-          onSubmit: () async {
-            NoteModel updateNote = NoteModel(
-                id: note.id,
-                title: title.text,
-                subTitle: subTitle.text);
-            await noteCntrl.updateNote(updateNote);
-            Get.back();
-          })
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 40),
+        child: NoteWidgets(
+            titleCntlr: title,
+            subTitleCntlr: subTitle,
+            buttonText: "Update Note",
+            onSubmit: () async {
+              NoteModel updateNote = NoteModel(
+                  id: note.id,
+                  title: title.text,
+                  subTitle: subTitle.text);
+              await noteCntrl.updateNote(updateNote);
+              Get.back();
+            }),
+      )
     );
   }
 }
