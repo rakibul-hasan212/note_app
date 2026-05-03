@@ -1,15 +1,17 @@
 
+import 'package:firebase_project/controller/notes/notes_controller.dart';
 import 'package:firebase_project/core/colors/app_colors.dart';
+import 'package:firebase_project/widgets/Note%20widget/note_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import 'controller/add_note_controller.dart';
-
 class AddNotePage extends StatelessWidget{
   AddNotePage({super.key});
-  final controller = Get.put(AddNoteController());
-  bool isloading = false;
+  final noteCntlr = Get.put(NoteController());
+  final titleController = TextEditingController();
+  final subTitleController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,42 +22,25 @@ class AddNotePage extends StatelessWidget{
         centerTitle: true,
         toolbarHeight: 60,
       ),
-      body: isloading ? Center(child: CircularProgressIndicator()): Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextFormField(
-              controller: controller.titleController.value,
-              decoration: InputDecoration(
-                hintText: "Enter the Title",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16)
-                )
-              ),
-            ),
-            SizedBox(height: 10,),
-            TextFormField(
-              controller: controller.subTitleController.value,
-              decoration: InputDecoration(
-                  hintText: "Description...",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16)
-                  ),
-                hintMaxLines: 4
-              ),
-            ),
-            SizedBox(height: 20,),
+      body: Padding(
+        padding:  EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+        child: NoteWidgets(
 
-            ElevatedButton(onPressed: () async{
-              await controller.addNotesFirestore(controller.titleController.value.text, controller.subTitleController.value.text);
-              controller.titleController.value.clear();
-              controller.subTitleController.value.clear();
-              isloading = true;
-              Navigator.pop(context);
-            }, child: Text("Submit",style: TextStyle(color: AppColors.buttonPrimary),))
-          ],
-        ),
+            titleCntlr: titleController,
+
+            subTitleCntlr: subTitleController,
+
+            buttonText: "Add Note",
+
+            onSubmit: () async{
+              if(titleController.text.isEmpty){
+                Get.snackbar("Error", "Title Required");
+                return;
+              }
+              await noteCntlr.addNote(titleController.text, subTitleController.text);
+              Get.back();
+            }
+        )
       ),
     );
   }
