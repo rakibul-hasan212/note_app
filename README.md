@@ -6,8 +6,25 @@ Each user has their own private notes, ensuring data security and proper organiz
 
 This app is highly useful in real-life for managing daily tasks, study notes, reminders, and quick ideas. It demonstrates modern mobile app development practices with a scalable and responsive design, making it a strong foundation for adding advanced features like search, categories, and notifications.
 
-## Agamikal inshallah ja ja korbo(30/04/26)
+## Agamikal inshallah ja ja korbo(4/05/26)
 * login and signup authentication part add korbo(done)
-* AddNote and UpdateNote modify korbo
+* AddNote and UpdateNote modify korbo(done)
 * Splash page er comment out korbo (done)
-* Page Route thik kora
+* Page Route thik kora(done)
+* Searching with title of notes
+
+---
+
+## Completed Feateure
+
+* Login (authentication)
+* SignUp (authentication)
+* Reset Password with email
+* Display the Notes
+* Add Note
+* Update Notes
+* Delete Notes
+* Error Handling
+* Handle the Loading state
+* 
+  
