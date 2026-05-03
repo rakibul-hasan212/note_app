@@ -1,16 +1,21 @@
 
 import 'package:firebase_project/controller/auth/auth_controller.dart';
 import 'package:firebase_project/core/colors/app_colors.dart';
-import 'package:firebase_project/pages/Home/home_page.dart';
-import 'package:firebase_project/pages/signup/signup_page.dart';
+import 'package:firebase_project/core/routes/app_routes.dart';
+import 'package:firebase_project/pages/forget%20password/forget_password_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget{
   LoginPage({super.key});
+
   final AuthController controller = Get.put(AuthController());
+
   TextEditingController email = TextEditingController();
+
   TextEditingController password = TextEditingController();
+
+  GlobalKey<FormState> formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +35,7 @@ class LoginPage extends StatelessWidget{
               Text("Welcome!!",style: TextStyle(color: AppColors.textPrimary, fontSize: 28, fontWeight: FontWeight.w800),),
               SizedBox(height:40,),
               Form(
+                key: formKey,
                   child: Column(
                     children: [
                       TextFormField(
@@ -43,6 +49,15 @@ class LoginPage extends StatelessWidget{
                           ),
                           prefixIcon: Icon(Icons.email_outlined),
                         ),
+                        validator: (value){
+                          if(value == null || value.isEmpty ){
+                            return "Email required";
+                          }
+                          if(!value.contains('@')){
+                            return 'Invalid Email';
+                          }
+                          return null;
+                        },
                       ),
                       SizedBox(height: 10,),
                       TextFormField(
@@ -58,6 +73,15 @@ class LoginPage extends StatelessWidget{
                           prefixIcon: Icon(Icons.lock_outlined),
                           suffixIcon: Icon(Icons.visibility_outlined)
                         ),
+                        validator: (value){
+                          if(value == null || value.isEmpty){
+                              return "Required a password";
+                          }
+                          if(value.length < 6 ){
+                              return "Password length should be at least 6";
+                          }
+                          return null;
+                        },
                       ),
                     ],
               )
@@ -71,13 +95,15 @@ class LoginPage extends StatelessWidget{
                       Checkbox(
                           value: false,
                           onChanged: (value){
-        
+                            //value = true;
                           }),
                       Text("Remember me")
                     ],
                   ),
                   InkWell(
                       onTap: (){
+                        Get.to(ForgetPasswordPage());
+                        //Navigator.push(context, MaterialPageRoute(builder: (_)=> ForgetPasswordPage()));
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Forget password perform successful")));
                       },
                       child: Text("Forget Password?",style: TextStyle(color: Colors.orange, fontWeight: FontWeight.w600),))
@@ -87,9 +113,11 @@ class LoginPage extends StatelessWidget{
               Obx(() {
                 return ElevatedButton(
                     onPressed: controller.loading.value? null
-                        : (){
-                      //Add currentState().validated later
-                      controller.login(email.text, password.text);
+                        : () async {
+                      //Add currentState().validation
+                      if(formKey.currentState!.validate()){
+                          await controller.login(email.text, password.text);
+                      }
                     },
                     child: controller.loading.value? Center(child: CircularProgressIndicator(),)
                         : Text("Login", style: TextStyle(color: AppColors.textPrimary, fontSize: 20, fontWeight: FontWeight.w600),));
@@ -102,7 +130,8 @@ class LoginPage extends StatelessWidget{
                   SizedBox(width: 5,),
                   InkWell(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (_)=> SignUpPage()));
+                        //Navigator.push(context, MaterialPageRoute(builder: (_)=> SignUpPage()));
+                        Get.toNamed(Routes.Signup);
                       },
                       child: Text("Sign Up",style: TextStyle(color: AppColors.textPrimary, fontSize: 16),)
                   )
@@ -140,12 +169,11 @@ class LoginPage extends StatelessWidget{
                       child: Icon(Icons.facebook_outlined,size: 32,color: Colors.deepOrange))
                 ],
               )
-        
+
             ],
           ),
         ),
       ),
     );
   }
-
 }

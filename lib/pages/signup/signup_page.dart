@@ -12,6 +12,7 @@ class SignUpPage extends StatelessWidget {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController userName = TextEditingController();
+  final formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +34,7 @@ class SignUpPage extends StatelessWidget {
                 fontWeight: FontWeight.w800),),
             SizedBox(height: 40,),
             Form(
+              key: formkey,
                 child: Column(
                   children: [
                     TextFormField(
@@ -59,6 +61,15 @@ class SignUpPage extends StatelessWidget {
                         ),
                         prefixIcon: Icon(Icons.email_outlined),
                       ),
+                      validator: (value){
+                        if(value == null || value.isEmpty){
+                          return "Required email";
+                        }
+                        if(!value.contains("@")){
+                          return "Required accurate format of Email";
+                        }
+                        return null;
+                      },
                     ),
                     SizedBox(height: 10,),
                     TextFormField(
@@ -74,6 +85,15 @@ class SignUpPage extends StatelessWidget {
                           prefixIcon: Icon(Icons.lock_outlined),
                           suffixIcon: Icon(Icons.visibility_outlined)
                       ),
+                      validator: (value){
+                        if(value == null || value.isEmpty){
+                          return "Required password";
+                        }
+                        if(value.length < 6 ){
+                          return " Password Length should at least 6";
+                        }
+                        return null;
+                      },
                     ),
                     SizedBox(height: 10,),
                     TextFormField(
@@ -97,9 +117,10 @@ class SignUpPage extends StatelessWidget {
             Obx(() {
               return ElevatedButton(
                   onPressed: controller.loading.value? null
-                      : () {
-                    //Add currentState().validation later
-                    controller.signUp(email.text, password.text);
+                      : () async {
+                    if(formkey.currentState!.validate()){
+                        await controller.signUp(email.text, password.text);
+                    }
                   },
                   child: controller.loading.value? Center(child: CircularProgressIndicator(),)
                       : Text("Sign Up", style: TextStyle(
