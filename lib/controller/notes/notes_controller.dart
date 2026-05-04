@@ -11,7 +11,8 @@ class NoteController extends GetxController {
 
   //loading state
   final RxBool isLoading = false.obs;
-
+  //for search
+  var searchText = ''.obs;
   // AuthController access
   final AuthController authController = Get.put(AuthController());
 
@@ -45,7 +46,6 @@ class NoteController extends GetxController {
       //loading state
       isLoading.value = true;
       String id = noteRef.doc().id; // unique ID generate
-
       NoteModel note = NoteModel(
         id: id,
         title: title,
@@ -75,13 +75,27 @@ class NoteController extends GetxController {
   //delete the notes
   Future<void> deleteNote(String id) async {
     try{
-      //loading state
-      isLoading.value = true;
       await noteRef.doc(id).delete();
     }catch(e){
       Get.snackbar("Error", e.toString());
-    }finally{
-      isLoading.value = false;
     }
   }
+
+  // Search NOTES (Search Logic)
+  List<NoteModel> get filteredNotes {
+
+    // If search is empty → full list show
+    if (searchText.value.isEmpty) {
+      return noteList;
+    }
+    // search with the search text, it can be title or subTitle text
+    return noteList.where((note) {
+      final title = note.title.toLowerCase();
+      final subTitle = note.subTitle.toLowerCase();
+      final query = searchText.value.toLowerCase();
+      // if title or subtitle match then show it
+      return title.contains(query) || subTitle.contains(query);
+    }).toList();
+  }
+
 }
