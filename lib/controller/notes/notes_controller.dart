@@ -8,6 +8,7 @@ class NoteController extends GetxController {
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+  final RxBool isLoading = false.obs;
   // AuthController access
   final AuthController authController = Get.put(AuthController());
 
@@ -37,24 +38,44 @@ class NoteController extends GetxController {
 
   // add note method to create new note
   Future<void> addNote(String title, String subTitle) async {
+    try{
+      isLoading.value = true;
+      String id = noteRef.doc().id; // unique ID generate
 
-    String id = noteRef.doc().id; // unique ID generate
-
-    NoteModel note = NoteModel(
-      id: id,
-      title: title,
-      subTitle: subTitle,
-    );
-    await noteRef.doc(id).set(note.toMap());
+      NoteModel note = NoteModel(
+        id: id,
+        title: title,
+        subTitle: subTitle,
+      );
+      await noteRef.doc(id).set(note.toMap());
+    }catch(e){
+      Get.snackbar("Error", e.toString());
+    }finally{
+      isLoading.value = false;
+    }
   }
 
   //update notes method
   Future<void> updateNote(NoteModel note) async {
-    await noteRef.doc(note.id).update(note.toMap());
+    try{
+      isLoading.value = true;
+      await noteRef.doc(note.id).update(note.toMap());
+    }catch(e){
+      Get.snackbar('Error', e.toString());
+    }finally{
+      isLoading.value = false;
+    }
   }
 
   //delete the notes
   Future<void> deleteNote(String id) async {
-    await noteRef.doc(id).delete();
+    try{
+      isLoading.value = true;
+      await noteRef.doc(id).delete();
+    }catch(e){
+      Get.snackbar("Error", e.toString());
+    }finally{
+      isLoading.value = false;
+    }
   }
 }
