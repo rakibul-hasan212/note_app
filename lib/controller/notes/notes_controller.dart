@@ -6,9 +6,12 @@ import '../auth/auth_controller.dart';
 
 class NoteController extends GetxController {
 
+  //initialize the firestore to store date
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+  //loading state
   final RxBool isLoading = false.obs;
+
   // AuthController access
   final AuthController authController = Get.put(AuthController());
 
@@ -39,6 +42,7 @@ class NoteController extends GetxController {
   // add note method to create new note
   Future<void> addNote(String title, String subTitle) async {
     try{
+      //loading state
       isLoading.value = true;
       String id = noteRef.doc().id; // unique ID generate
 
@@ -58,6 +62,7 @@ class NoteController extends GetxController {
   //update notes method
   Future<void> updateNote(NoteModel note) async {
     try{
+      //loading state
       isLoading.value = true;
       await noteRef.doc(note.id).update(note.toMap());
     }catch(e){
@@ -70,6 +75,7 @@ class NoteController extends GetxController {
   //delete the notes
   Future<void> deleteNote(String id) async {
     try{
+      //loading state
       isLoading.value = true;
       await noteRef.doc(id).delete();
     }catch(e){

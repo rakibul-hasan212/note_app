@@ -7,13 +7,15 @@ class NoteWidgets extends StatelessWidget{
   final TextEditingController subTitleCntlr;
   final String buttonText;
   final VoidCallback onSubmit;
+  final bool isLoading;
 
   NoteWidgets({
     super.key,
     required this.titleCntlr,
     required this.subTitleCntlr,
     required this.buttonText,
-    required this.onSubmit
+    required this.onSubmit,
+    required this.isLoading
 });
 
   @override
@@ -51,8 +53,9 @@ class NoteWidgets extends StatelessWidget{
         SizedBox(
           width: double.infinity,
           child: ElevatedButton(
-              onPressed: onSubmit,
-              child: Text(buttonText)
+              onPressed:  isLoading ? null : onSubmit,
+              child: isLoading ? Center(child: CircularProgressIndicator(),)
+                  : Text(buttonText)
           ),
         )
       ],

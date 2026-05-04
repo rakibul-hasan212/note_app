@@ -22,26 +22,29 @@ class AddNotePage extends StatelessWidget{
         centerTitle: true,
         toolbarHeight: 60,
       ),
-      body: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 20,vertical: 40),
-        child: NoteWidgets(
+      body: Obx(() {
+        return Padding(
+            padding:  EdgeInsets.symmetric(horizontal: 20,vertical: 40),
+            child: NoteWidgets(
 
-            titleCntlr: titleController,
+              titleCntlr: titleController,
 
-            subTitleCntlr: subTitleController,
+              subTitleCntlr: subTitleController,
 
-            buttonText: "Add Note",
+              buttonText: "Add Note",
 
-            onSubmit: () async{
-              if(titleController.text.isEmpty){
-                Get.snackbar("Error", "Title Required");
-                return;
-              }
-              await noteCntlr.addNote(titleController.text, subTitleController.text);
-              Get.back();
-            }
-        )
-      ),
+              onSubmit: () async{
+                if(titleController.text.isEmpty){
+                  Get.snackbar("Error", "Title Required");
+                  return;
+                }
+                await noteCntlr.addNote(titleController.text, subTitleController.text);
+                Get.back();
+              },
+              isLoading: noteCntlr.isLoading.value,
+            )
+        );
+      })
     );
   }
 
