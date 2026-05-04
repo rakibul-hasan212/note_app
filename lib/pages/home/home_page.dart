@@ -3,6 +3,7 @@ import 'package:firebase_project/controller/auth/auth_controller.dart';
 import 'package:firebase_project/controller/notes/notes_controller.dart';
 import 'package:firebase_project/core/colors/app_colors.dart';
 import 'package:firebase_project/pages/update/update_note_page.dart';
+import 'package:firebase_project/widgets/DateTimeFormat/formate_date_time.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +14,7 @@ class HomePage extends StatelessWidget{
   HomePage({super.key});
   final AuthController authCntlr = Get.put(AuthController());
   final NoteController noteController = Get.put(NoteController());
+  final searchtextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,22 +46,29 @@ class HomePage extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             TextFormField(
+              controller: searchtextController,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search_outlined),
                 hintText: "Search Note",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16)
+                ),
+                suffixIcon: IconButton(
+                    onPressed: (){
+                      searchtextController.clear();
+                      noteController.searchText.value = '';
+                    },
+                    icon: Icon(Icons.clear_outlined)
                 )
               ),
               onChanged: (value){
-                //update later
+                noteController.searchText.value = value;
               },
             ),
             SizedBox(height: 10,),
             Expanded(
                 child: Obx(() {
-                  var note = noteController.noteList;
-
+                  var note = noteController.filteredNotes;
                   if(note.isEmpty){
                     return Center(child: Text("No Notes available"),);
                   }
@@ -69,11 +78,36 @@ class HomePage extends StatelessWidget{
                         var noteItem = note[index];
                         return Card(
                           child: ListTile(
-                            onTap: (){
-                              Get.to(()=> UpdateNotePage(note: noteItem));
-                            },
-                            title: Text(noteItem.title),
-                            subtitle: Text(noteItem.subTitle),
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(noteItem.title),
+                                SizedBox(width: 30,),
+                                IconButton(
+                                    onPressed: (){
+                                      Get.to(()=> UpdateNotePage(note: noteItem));
+                                    },
+                                    icon: Icon(Icons.edit_note_outlined))
+                              ],
+                            ),
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  noteItem.subTitle,
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,),
+                                SizedBox(height: 5,),
+                                Text(
+                                  noteItem.updatedAt != null
+                                      ? "Updated ${formatDateTime(noteItem.updatedAt)}"
+                                      : noteItem.createdAt != null
+                                          ? "Created ${formatDateTime(noteItem.createdAt)}"
+                                          : " Savings ...",
+                                  style: TextStyle(color: Colors.red),)
+                              ],
+                            ),
+                              
                             trailing: IconButton(
                                 onPressed: () async{
                                   await noteController.deleteNote(noteItem.id);

@@ -6,12 +6,14 @@ class NoteModel {
   String title;
   String subTitle;
   DateTime? createdAt;
+  DateTime? updatedAt;
 
   NoteModel({
     required this.id,
     required this.title,
     required this.subTitle,
-    this.createdAt
+    this.createdAt,
+    this.updatedAt
   });
 
   factory NoteModel.fromMap(Map<String, dynamic> data, String id) {
@@ -19,8 +21,11 @@ class NoteModel {
       id: id,
       title: data['title'] ?? '',
       subTitle: data['subTitle'] ?? '',
-      //convert toDate()
-      createdAt: data['createdAt'] != null ? (data['createdAt'] as Timestamp).toDate() : null
+      //Timestamp to convert toDate()
+      createdAt: data['createdAt'] != null
+          ? (data['createdAt'] as Timestamp).toDate() : null,
+      updatedAt: data['updatedAt'] != null
+          ? (data['updatedAt'] as Timestamp).toDate() : null
     );
   }
 
@@ -28,7 +33,6 @@ class NoteModel {
     return {
       'title': title,
       'subTitle': subTitle,
-      'createdAt': createdAt
     };
   }
 }

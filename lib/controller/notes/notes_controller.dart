@@ -46,12 +46,11 @@ class NoteController extends GetxController {
       //loading state
       isLoading.value = true;
       String id = noteRef.doc().id; // unique ID generate
-      NoteModel note = NoteModel(
-        id: id,
-        title: title,
-        subTitle: subTitle,
-      );
-      await noteRef.doc(id).set(note.toMap());
+      await noteRef.doc(id).set({
+        'title': title,
+        'subTitle': subTitle,
+        'createdAt': FieldValue.serverTimestamp()
+      });
     }catch(e){
       Get.snackbar("Error", e.toString());
     }finally{
@@ -64,7 +63,11 @@ class NoteController extends GetxController {
     try{
       //loading state
       isLoading.value = true;
-      await noteRef.doc(note.id).update(note.toMap());
+      await noteRef.doc(note.id).update({
+        'title': note.title,
+        'subTitle': note.subTitle,
+        'updatedAt': FieldValue.serverTimestamp()
+      });
     }catch(e){
       Get.snackbar('Error', e.toString());
     }finally{
