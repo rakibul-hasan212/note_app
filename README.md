@@ -6,12 +6,47 @@ Each user has their own private notes, ensuring data security and proper organiz
 
 This app is highly useful in real-life for managing daily tasks, study notes, reminders, and quick ideas. It demonstrates modern mobile app development practices with a scalable and responsive design, making it a strong foundation for adding advanced features like search, categories, and notifications.
 
-## Agamikal inshallah ja ja korbo(4/05/26)
-* login and signup authentication part add korbo(done)
-* AddNote and UpdateNote modify korbo(done)
-* Splash page er comment out korbo (done)
-* Page Route thik kora(done)
-* Searching with title of notes
+## Completed Work Right Now 🔥
+
+## 🔐 Authentication(User-wise note)
+👉 Every user have their own notes, No one can see these and access these
+✨ Feature:
+* Login page with auth
+* Signup page with auth
+* Forget Password( Reset the Password with email )
+* Make different documents for every user in Cloud Firestore
+
+---
+
+## AddNote Page
+
+User can add their notes as much as they want
+
+---
+## ✏️ UpdateNote Page
+
+User can update the current notes
+
+---
+
+## ⏰ Timestamp
+* Which note created or updated show the message
+* when it's created or updated show the Timestamp
+
+---
+
+## 🔍 Search System
+✨ Feature:
+* User can Search note with title
+* User can Search note with Subtitle
+* Real-time Search occurs
+
+---
+
+## 👉 Agamikal inshallah ja ja korbo(05/05/26)
+* 📌Pin system
+* 🗂️Category system
+* Sorting system
 
 ---
 
@@ -26,5 +61,8 @@ This app is highly useful in real-life for managing daily tasks, study notes, re
 * Delete Notes
 * Error Handling
 * Handle the Loading state
-* 
+* Search note
+* Timestamp show
+
+
   

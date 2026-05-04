@@ -1,13 +1,13 @@
 import 'package:intl/intl.dart';
 
-// 🔥 Date format function
+// Date format function
 String formatDateTime(DateTime? dateTime) {
 
   if (dateTime == null) return "";
 
   final now = DateTime.now();
 
-  // 🔥 check today
+  // check today
   if (dateTime.day == now.day &&
       dateTime.month == now.month &&
       dateTime.year == now.year) {
@@ -15,7 +15,7 @@ String formatDateTime(DateTime? dateTime) {
     return "Today, ${DateFormat.jm().format(dateTime)}";
   }
 
-  // 🔥 check yesterday
+  // check yesterday
   final yesterday = now.subtract(Duration(days: 1));
 
   if (dateTime.day == yesterday.day &&
