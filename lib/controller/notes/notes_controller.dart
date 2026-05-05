@@ -13,6 +13,10 @@ class NoteController extends GetxController {
   final RxBool isLoading = false.obs;
   //for search
   var searchText = ''.obs;
+
+  //for category selection
+  var selectedCategory = 'All'.obs;
+
   // AuthController access
   final AuthController authController = Get.put(AuthController());
 
@@ -41,14 +45,18 @@ class NoteController extends GetxController {
   }
 
   // add note method to create new note
-  Future<void> addNote(String title, String subTitle) async {
+  Future<void> addNote(String title, String subTitle, String category) async {
     try{
       //loading state
       isLoading.value = true;
       String id = noteRef.doc().id; // unique ID generate
       await noteRef.doc(id).set({
+        //form user
         'title': title,
         'subTitle': subTitle,
+        'category': category,
+        //by default set
+        'isPinned': false,
         'createdAt': FieldValue.serverTimestamp()
       });
     }catch(e){
@@ -104,6 +112,13 @@ class NoteController extends GetxController {
         return note.title.toLowerCase().contains(query) || note.subTitle.toLowerCase().contains(query);
       }).toList();
     }
+    //category filter
+    if (selectedCategory.value != "All") {
+      list = list.where((note) {
+        return note.category == selectedCategory.value;
+      }).toList();
+    }
+
     //sorting with respect to pinned or not
     list.sort((a, b){
       if(a.isPinned == b.isPinned){

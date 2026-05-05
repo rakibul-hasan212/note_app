@@ -8,6 +8,7 @@ class NoteModel {
   DateTime? createdAt;
   DateTime? updatedAt;
   bool isPinned;
+  String category;
 
   NoteModel({
     required this.id,
@@ -15,7 +16,8 @@ class NoteModel {
     required this.subTitle,
     this.createdAt,
     this.updatedAt,
-    this.isPinned = false
+    this.isPinned = false,
+    this.category = 'All'
   });
 
   factory NoteModel.fromMap(Map<String, dynamic> data, String id) {
@@ -24,6 +26,7 @@ class NoteModel {
       title: data['title'] ?? '',
       subTitle: data['subTitle'] ?? '',
       isPinned: data['isPinned'] ?? false,
+      category: data['category'] ?? 'All',
 
       //Timestamp to convert toDate()
       createdAt: data['createdAt'] != null
@@ -37,7 +40,8 @@ class NoteModel {
     return {
       'title': title,
       'subTitle': subTitle,
-      'isPinned': isPinned
+      'isPinned': isPinned,
+      'category': category
     };
   }
 }

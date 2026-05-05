@@ -4,6 +4,7 @@ import 'package:firebase_project/controller/notes/notes_controller.dart';
 import 'package:firebase_project/core/colors/app_colors.dart';
 import 'package:firebase_project/pages/update/update_note_page.dart';
 import 'package:firebase_project/widgets/DateTimeFormat/formate_date_time.dart';
+import 'package:firebase_project/widgets/filter%20Button/filter_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -66,6 +67,16 @@ class HomePage extends StatelessWidget{
               },
             ),
             SizedBox(height: 10,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                filterButton("All"),
+                filterButton("Study"),
+                filterButton("Personal"),
+                filterButton("Work"),
+              ],
+            ),
+            SizedBox(height: 10,),
             Expanded(
                 child: Obx(() {
                   var note = noteController.filteredNotes;
@@ -107,13 +118,20 @@ class HomePage extends StatelessWidget{
                                   maxLines: 3,
                                   overflow: TextOverflow.ellipsis,),
                                 SizedBox(height: 5,),
-                                Text(
-                                  noteItem.updatedAt != null
-                                      ? "Updated ${formatDateTime(noteItem.updatedAt)}"
-                                      : noteItem.createdAt != null
+                                Row(
+                                  children: [
+                                    Text(
+                                      noteItem.updatedAt != null
+                                          ? "Updated ${formatDateTime(noteItem.updatedAt)}"
+                                          : noteItem.createdAt != null
                                           ? "Created ${formatDateTime(noteItem.createdAt)}"
                                           : " Savings ...",
-                                  style: TextStyle(color: Colors.red),)
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                    SizedBox(width: 20,),
+                                    Text("Category: ${noteItem.category}", style: TextStyle(color: Colors.deepOrange),)
+                                  ],
+                                )
                               ],
                             ),
                               

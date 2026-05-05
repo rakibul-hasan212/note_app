@@ -38,7 +38,7 @@ class AddNotePage extends StatelessWidget{
                   Get.snackbar("Error", "Title Required");
                   return;
                 }
-                await noteCntlr.addNote(titleController.text, subTitleController.text);
+                await noteCntlr.addNote(titleController.text, subTitleController.text, noteCntlr.selectedCategory.value);
                 Get.back();
               },
               isLoading: noteCntlr.isLoading.value,
