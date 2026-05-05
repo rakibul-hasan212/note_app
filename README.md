@@ -15,12 +15,12 @@ This app is highly useful in real-life for managing daily tasks, study notes, re
 * Signup page with auth
 * Forget Password( Reset the Password with email )
 * Make different documents for every user in Cloud Firestore
-
+* 
 ---
 
 ## AddNote Page
 
-User can add their notes as much as they want
+User can add their notes as much as they want with their suitable categories
 
 ---
 ## ✏️ UpdateNote Page
@@ -42,11 +42,35 @@ User can update the current notes
 * Real-time Search occurs
 
 ---
+## 📌Pin system
+
+User can pin there note according to their favourite or  define important notes to add pinned
+✨ Feature:
+* Pinned note comes first
+* Tile color change according to pinned or unpinned 
+
+---
+## Sorting the Note
+
+* Pinned note comes First
+* Category wise sort perform
+* Categories wise Note show
+
+---
+
+## 🗂️Category System
+
+* Add the note with respected Category
+* Search the note with respected Category
+* Pinned the note with respected Category
+
+---
 
 ## 👉 Agamikal inshallah ja ja korbo(05/05/26)
-* 📌Pin system
-* 🗂️Category system
-* Sorting system
+
+* Notification add 
+* Offline optimization
+* Trash system
 
 ---
 
@@ -63,6 +87,9 @@ User can update the current notes
 * Handle the Loading state
 * Search note
 * Timestamp show
+* Pin the note 
+* Sorting
+* Category wise note set
 
 
   
