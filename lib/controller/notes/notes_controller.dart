@@ -1,5 +1,5 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../../model/note_model.dart';
 import '../auth/auth_controller.dart';
@@ -74,7 +74,6 @@ class NoteController extends GetxController {
       isLoading.value = false;
     }
   }
-
   //delete the notes
   Future<void> deleteNote(String id) async {
     try{
@@ -83,22 +82,37 @@ class NoteController extends GetxController {
       Get.snackbar("Error", e.toString());
     }
   }
-
+  //togglePinned
+  Future<void> togglePinned(NoteModel note) async{
+    try{
+      await noteRef.doc(note.id).update({
+        'isPinned': !note.isPinned
+      });
+    }catch(e){
+      Get.snackbar("Error", e.toString());
+    }
+  }
   // Search NOTES (Search Logic)
   List<NoteModel> get filteredNotes {
 
-    // If search is empty → full list show
-    if (searchText.value.isEmpty) {
-      return noteList;
-    }
+    List<NoteModel> list = noteList;
+
     // search with the search text, it can be title or subTitle text
-    return noteList.where((note) {
-      final title = note.title.toLowerCase();
-      final subTitle = note.subTitle.toLowerCase();
-      final query = searchText.value.toLowerCase();
-      // if title or subtitle match then show it
-      return title.contains(query) || subTitle.contains(query);
-    }).toList();
+    if(searchText.value.isNotEmpty){
+      list = list.where((note){
+        final query = searchText.value.toLowerCase();
+        return note.title.toLowerCase().contains(query) || note.subTitle.toLowerCase().contains(query);
+      }).toList();
+    }
+    //sorting with respect to pinned or not
+    list.sort((a, b){
+      if(a.isPinned == b.isPinned){
+        return 0; // if note is not pinned show the as usual list
+      }
+      return a.isPinned ? -1 : 1 ; // if the note is pinned show in up others wise show in bellow
+    });
+    // If search is empty → full list show with sort
+    return list;
   }
 
 }

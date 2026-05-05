@@ -7,13 +7,15 @@ class NoteModel {
   String subTitle;
   DateTime? createdAt;
   DateTime? updatedAt;
+  bool isPinned;
 
   NoteModel({
     required this.id,
     required this.title,
     required this.subTitle,
     this.createdAt,
-    this.updatedAt
+    this.updatedAt,
+    this.isPinned = false
   });
 
   factory NoteModel.fromMap(Map<String, dynamic> data, String id) {
@@ -21,6 +23,8 @@ class NoteModel {
       id: id,
       title: data['title'] ?? '',
       subTitle: data['subTitle'] ?? '',
+      isPinned: data['isPinned'] ?? false,
+
       //Timestamp to convert toDate()
       createdAt: data['createdAt'] != null
           ? (data['createdAt'] as Timestamp).toDate() : null,
@@ -33,6 +37,7 @@ class NoteModel {
     return {
       'title': title,
       'subTitle': subTitle,
+      'isPinned': isPinned
     };
   }
 }

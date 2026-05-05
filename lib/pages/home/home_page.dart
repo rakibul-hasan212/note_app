@@ -78,10 +78,19 @@ class HomePage extends StatelessWidget{
                         var noteItem = note[index];
                         return Card(
                           child: ListTile(
+                            tileColor: noteItem.isPinned ? Colors.lightGreen[200] : Colors.white,
                             title: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(noteItem.title),
+                                SizedBox(width: 30,),
+                                IconButton(
+                                    onPressed: (){
+                                      noteController.togglePinned(noteItem);
+                                    },
+                                    icon: noteItem.isPinned ? Icon(Icons.favorite, color: Colors.deepOrange,)
+                                        : Icon(Icons.favorite_border_outlined, color: Colors.orange,)
+                                ),
                                 SizedBox(width: 30,),
                                 IconButton(
                                     onPressed: (){
