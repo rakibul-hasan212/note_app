@@ -3,7 +3,7 @@
 import 'package:firebase_project/controller/notes/notes_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-final NoteController controller = Get.find();
+final NoteController controller = Get.put(NoteController());
 Widget filterButton(String category) {
   return Obx(() => Padding(
     padding: EdgeInsets.symmetric(horizontal: 5),
