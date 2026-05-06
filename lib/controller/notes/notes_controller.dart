@@ -129,7 +129,7 @@ class NoteController extends GetxController {
       // check when the notes are updated or created
       final aTime = a.updatedAt ?? a.createdAt;
       final bTime = b.updatedAt ?? b.createdAt;
-      // null safety as usual
+      // null safety
       if (aTime == null || bTime == null) return 0;
 
       // 🔥 latest top

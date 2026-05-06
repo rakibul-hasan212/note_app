@@ -55,6 +55,7 @@ User can pin there note according to their favourite or  define important notes 
 * Pinned note comes First
 * Category wise sort perform
 * Categories wise Note show
+* least notes comes first(Created or Updated)
 
 ---
 
@@ -66,10 +67,8 @@ User can pin there note according to their favourite or  define important notes 
 
 ---
 
-## 👉 Agamikal inshallah ja ja korbo(05/05/26)
-
-* Notification add 
-* Offline optimization
+## 👉 Agamikal inshallah ja ja korbo(07/05/26)
+* Notification add
 * Trash system
 
 ---
@@ -90,6 +89,7 @@ User can pin there note according to their favourite or  define important notes 
 * Pin the note 
 * Sorting
 * Category wise note set
+* Add multi-line Notes (using markdownBody to show advanced formatted notes)
 
 
   
