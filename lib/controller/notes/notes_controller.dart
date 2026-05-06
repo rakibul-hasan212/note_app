@@ -121,10 +121,19 @@ class NoteController extends GetxController {
 
     //sorting with respect to pinned or not
     list.sort((a, b){
-      if(a.isPinned == b.isPinned){
-        return 0; // if note is not pinned show the as usual list
+      if(a.isPinned != b.isPinned){
+        return a.isPinned ? -1 : 1 ; // if the note is pinned show in up others wise show in bellow
       }
-      return a.isPinned ? -1 : 1 ; // if the note is pinned show in up others wise show in bellow
+
+      //  step 2 → latest time first
+      // check when the notes are updated or created
+      final aTime = a.updatedAt ?? a.createdAt;
+      final bTime = b.updatedAt ?? b.createdAt;
+      // null safety as usual
+      if (aTime == null || bTime == null) return 0;
+
+      // 🔥 latest top
+      return bTime.compareTo(aTime);
     });
     // If search is empty → full list show with sort
     return list;
