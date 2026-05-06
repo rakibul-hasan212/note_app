@@ -39,10 +39,11 @@ class NoteWidgets extends StatelessWidget{
         // description
         TextFormField(
           controller: subTitleCntlr,
-          keyboardType: TextInputType.text,
+          keyboardType: TextInputType.multiline,
+          maxLines: null,
+          minLines: 8,
           decoration: InputDecoration(
-            hintMaxLines: 5,
-            hintText: "Description......",
+            hintText: "Description......(If you want to give a headline for that use ##headline , and if you want bullet point - text, if you mark as important keywords then push the text inside *what you want to right* )",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16)
             )
@@ -51,6 +52,7 @@ class NoteWidgets extends StatelessWidget{
         SizedBox(height: 20,),
         //submit button
         SizedBox(
+          height: 40,
           width: double.infinity,
           child: ElevatedButton(
               onPressed:  isLoading ? null : onSubmit,

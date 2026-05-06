@@ -2,6 +2,7 @@ import 'package:firebase_project/controller/notes/notes_controller.dart';
 import 'package:firebase_project/pages/update/update_note_page.dart';
 import 'package:firebase_project/widgets/DateTimeFormat/formate_date_time.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 
 class noteBody extends StatelessWidget {
@@ -73,11 +74,8 @@ class noteBody extends StatelessWidget {
                     height: 6,
                   ),
                   //description or subtitle
-                  Text(
-                    noteItem.subTitle,
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(color: Colors.grey[700]),
+                  MarkdownBody(
+                      data: noteItem.subTitle
                   ),
                   SizedBox(
                     height: 10,
