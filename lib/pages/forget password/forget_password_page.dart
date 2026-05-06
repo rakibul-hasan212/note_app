@@ -21,7 +21,7 @@ class ForgetPasswordPage extends StatelessWidget{
               radius: 40,
               child: Icon(Icons.lock_reset, size: 40,),
             ),
-            SizedBox(height: 40,),
+            SizedBox(height: 20,),
             Form(
               key: formKey,
               child: Column(

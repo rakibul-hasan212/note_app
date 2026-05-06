@@ -23,23 +23,32 @@ class AddNotePage extends StatelessWidget{
         return Center(
           child: Padding(
               padding:  EdgeInsets.symmetric(horizontal: 20,vertical: 40),
-              child: NoteWidgets(
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    radius: 40,
+                    child: Icon(Icons.note_add_outlined,size: 40,),
+                  ),
+                  SizedBox(height: 20,),
+                  NoteWidgets(
 
-                titleCntlr: titleController,
+                    titleCntlr: titleController,
 
-                subTitleCntlr: subTitleController,
+                    subTitleCntlr: subTitleController,
 
-                buttonText: "Add Note",
+                    buttonText: "Add Note",
 
-                onSubmit: () async{
-                  if(titleController.text.isEmpty){
-                    Get.snackbar("Error", "Title Required");
-                    return;
-                  }
-                  await noteCntlr.addNote(titleController.text, subTitleController.text, noteCntlr.selectedCategory.value);
-                  Get.back();
-                },
-                isLoading: noteCntlr.isLoading.value,
+                    onSubmit: () async{
+                      if(titleController.text.isEmpty){
+                        Get.snackbar("Error", "Title Required");
+                        return;
+                      }
+                      await noteCntlr.addNote(titleController.text, subTitleController.text, noteCntlr.selectedCategory.value);
+                      Get.back();
+                    },
+                    isLoading: noteCntlr.isLoading.value,
+                  ),
+                ],
               )
           ),
         );

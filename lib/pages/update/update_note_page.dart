@@ -37,7 +37,7 @@ class UpdateNotePage extends StatelessWidget {
                   radius: 40,
                   child: Icon(Icons.update,size: 40,),
                 ),
-                SizedBox(height: 40,),
+                SizedBox(height: 20,),
                 NoteWidgets(
                   titleCntlr: title,
                   subTitleCntlr: subTitle,
