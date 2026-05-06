@@ -28,21 +28,29 @@ class UpdateNotePage extends StatelessWidget {
           toolbarHeight: 60,
         ),
         body: Obx(() {
-          return Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-              child: NoteWidgets(
-                titleCntlr: title,
-                subTitleCntlr: subTitle,
-                buttonText: "Update Note",
-                onSubmit: () async {
-                  NoteModel updateNote = NoteModel(
-                      id: note.id, title: title.text, subTitle: subTitle.text);
-                  await noteCntrl.updateNote(updateNote);
-                  Get.back();
-                },
-                isLoading: noteCntrl.isLoading.value,
-              ),
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 40,
+                  child: Icon(Icons.update,size: 40,),
+                ),
+                SizedBox(height: 40,),
+                NoteWidgets(
+                  titleCntlr: title,
+                  subTitleCntlr: subTitle,
+                  buttonText: "Update Note",
+                  onSubmit: () async {
+                    NoteModel updateNote = NoteModel(
+                        id: note.id, title: title.text, subTitle: subTitle.text);
+                    await noteCntrl.updateNote(updateNote);
+                    Get.back();
+                  },
+                  isLoading: noteCntrl.isLoading.value,
+                ),
+              ],
             ),
           );
         })
