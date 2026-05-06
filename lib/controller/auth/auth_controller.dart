@@ -9,6 +9,10 @@ class AuthController extends GetxController {
 
   // Firebase Auth instance
   final FirebaseAuth auth = FirebaseAuth.instance;
+  //passwordVisibility
+  final RxBool isPasswordHidden = true.obs;
+  //remember me checkbox value  set
+  final RxBool rememberMe = false.obs;
 
   // current user observable (reactive)
   Rxn<User> firebaseUser = Rxn<User>();

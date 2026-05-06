@@ -43,11 +43,13 @@ class LoginPage extends StatelessWidget{
               children: [
                 Row(
                   children: [
-                    Checkbox(
-                        value: false,
-                        onChanged: (value){
-                          //value = true;
-                        }),
+                    Obx((){
+                      return Checkbox(
+                          value: controller.rememberMe.value,
+                          onChanged: (value){
+                            controller.rememberMe.value = value! ;
+                          });
+                    }),
                     Text("Remember me")
                   ],
                 ),
