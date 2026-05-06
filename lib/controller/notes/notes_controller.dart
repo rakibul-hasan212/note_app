@@ -132,7 +132,7 @@ class NoteController extends GetxController {
       // null safety
       if (aTime == null || bTime == null) return 0;
 
-      // 🔥 latest top
+      // latest top
       return bTime.compareTo(aTime);
     });
     // If search is empty → full list show with sort
