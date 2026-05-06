@@ -15,7 +15,7 @@ This app is highly useful in real-life for managing daily tasks, study notes, re
 * Signup page with auth
 * Forget Password( Reset the Password with email )
 * Make different documents for every user in Cloud Firestore
-* 
+
 ---
 
 ## AddNote Page

@@ -11,6 +11,14 @@ Widget filterButton(String category) {
       label: Text(category),
 
       selected: controller.selectedCategory.value == category,
+      selectedColor: Colors.indigo,
+      backgroundColor: Colors.grey.shade200,
+
+      labelStyle: TextStyle(
+        color: controller.selectedCategory.value == category
+            ? Colors.white
+            : Colors.black,
+      ),
 
       onSelected: (value) {
         controller.selectedCategory.value = category;

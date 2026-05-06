@@ -18,9 +18,7 @@ class UpdateNotePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColors.backgroundPrimary,
         appBar: AppBar(
-          backgroundColor: AppColors.backgroundDark,
           title: Text("Note Update",
               style: TextStyle(
                   color: AppColors.textPrimary,
@@ -30,19 +28,21 @@ class UpdateNotePage extends StatelessWidget {
           toolbarHeight: 60,
         ),
         body: Obx(() {
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-            child: NoteWidgets(
-              titleCntlr: title,
-              subTitleCntlr: subTitle,
-              buttonText: "Update Note",
-              onSubmit: () async {
-                NoteModel updateNote = NoteModel(
-                    id: note.id, title: title.text, subTitle: subTitle.text);
-                await noteCntrl.updateNote(updateNote);
-                Get.back();
-              },
-              isLoading: noteCntrl.isLoading.value,
+          return Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+              child: NoteWidgets(
+                titleCntlr: title,
+                subTitleCntlr: subTitle,
+                buttonText: "Update Note",
+                onSubmit: () async {
+                  NoteModel updateNote = NoteModel(
+                      id: note.id, title: title.text, subTitle: subTitle.text);
+                  await noteCntrl.updateNote(updateNote);
+                  Get.back();
+                },
+                isLoading: noteCntrl.isLoading.value,
+              ),
             ),
           );
         })

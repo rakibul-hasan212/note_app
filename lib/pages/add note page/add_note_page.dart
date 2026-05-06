@@ -15,34 +15,33 @@ class AddNotePage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundPrimary,
       appBar: AppBar(
-        backgroundColor: AppColors.backgroundDark,
         title: Text("Add Note",style: TextStyle(color: AppColors.textPrimary,fontSize: 28,fontWeight: FontWeight.w800)),
-        centerTitle: true,
         toolbarHeight: 60,
       ),
       body: Obx(() {
-        return Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 20,vertical: 40),
-            child: NoteWidgets(
+        return Center(
+          child: Padding(
+              padding:  EdgeInsets.symmetric(horizontal: 20,vertical: 40),
+              child: NoteWidgets(
 
-              titleCntlr: titleController,
+                titleCntlr: titleController,
 
-              subTitleCntlr: subTitleController,
+                subTitleCntlr: subTitleController,
 
-              buttonText: "Add Note",
+                buttonText: "Add Note",
 
-              onSubmit: () async{
-                if(titleController.text.isEmpty){
-                  Get.snackbar("Error", "Title Required");
-                  return;
-                }
-                await noteCntlr.addNote(titleController.text, subTitleController.text, noteCntlr.selectedCategory.value);
-                Get.back();
-              },
-              isLoading: noteCntlr.isLoading.value,
-            )
+                onSubmit: () async{
+                  if(titleController.text.isEmpty){
+                    Get.snackbar("Error", "Title Required");
+                    return;
+                  }
+                  await noteCntlr.addNote(titleController.text, subTitleController.text, noteCntlr.selectedCategory.value);
+                  Get.back();
+                },
+                isLoading: noteCntlr.isLoading.value,
+              )
+          ),
         );
       })
     );

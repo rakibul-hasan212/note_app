@@ -4,6 +4,7 @@ import 'package:firebase_project/core/routes/app_pages.dart';
 import 'package:firebase_project/core/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'core/colors/app_colors.dart';
 import 'firebase_options.dart';
 
 void main() async{
@@ -22,6 +23,18 @@ class MyApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.indigo,
+        ),
+        scaffoldBackgroundColor:  AppColors.backgroundPrimary,//Colors.grey.shade100, //Color(0xFFC5DADE),
+        appBarTheme: AppBarTheme(
+          backgroundColor: AppColors.backgroundDark,
+          elevation: 0,
+          centerTitle: true,
+        ),
+      ),
       initialRoute: Routes.Splash,
       getPages: AppPages.routes,
     );

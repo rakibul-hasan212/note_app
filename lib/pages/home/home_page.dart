@@ -17,9 +17,8 @@ class HomePage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundPrimary,
       appBar: AppBar(
-        backgroundColor: AppColors.backgroundDark,
+        //backgroundColor: AppColors.backgroundDark,
         title: Text("My Notes",style: TextStyle(color: AppColors.textPrimary,fontSize: 28,fontWeight: FontWeight.w800),),
         centerTitle: true,
         toolbarHeight: 60,

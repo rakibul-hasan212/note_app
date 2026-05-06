@@ -18,44 +18,45 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundPrimary,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              radius: 40,
-              child: Icon(Icons.login_sharp, size: 40,),
-            ),
-            SizedBox(height: 10,),
-            Text("Welcome To SignUp!!", style: TextStyle(
-                color: AppColors.textPrimary,
-                fontSize: 28,
-                fontWeight: FontWeight.w800),),
-            SizedBox(height: 40,),
-            SignupFormWidget(
-                userName: userName,
-                email: email,
-                password: password,
-                formkey: formkey
-            ),
-            SizedBox(height: 20,),
-            Obx(() {
-              return ElevatedButton(
-                  onPressed: controller.loading.value? null
-                      : () async {
-                    if(formkey.currentState!.validate()){
-                        await controller.signUp(email.text, password.text);
-                    }
-                  },
-                  child: controller.loading.value? Center(child: CircularProgressIndicator(),)
-                      : Text("Sign Up", style: TextStyle(
-                      color: AppColors.textPrimary,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600),));
-            }),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                radius: 40,
+                child: Icon(Icons.login_sharp, size: 40,),
+              ),
+              SizedBox(height: 10,),
+              Text("Welcome To SignUp!!", style: TextStyle(
+                  color: AppColors.textPrimary,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w800),),
+              SizedBox(height: 40,),
+              SignupFormWidget(
+                  userName: userName,
+                  email: email,
+                  password: password,
+                  formkey: formkey
+              ),
+              SizedBox(height: 20,),
+              Obx(() {
+                return ElevatedButton(
+                    onPressed: controller.loading.value? null
+                        : () async {
+                      if(formkey.currentState!.validate()){
+                          await controller.signUp(email.text, password.text);
+                      }
+                    },
+                    child: controller.loading.value? Center(child: CircularProgressIndicator(),)
+                        : Text("Sign Up", style: TextStyle(
+                        color: AppColors.textPrimary,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600),));
+              }),
+            ],
+          ),
         ),
       ),
     );
