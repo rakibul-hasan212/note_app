@@ -1,3 +1,18 @@
+## 📸 Screenshots
+
+### 👨‍💻 Profile UI Design with Navigator Page also works on Drawer
+
+<p align="center">
+  <img src=" path " width="23%"/>
+  <img src="path" width="23%"/>
+  <img src="path" width="23%"/>
+  <img src="path" width="23%"/>
+</p>
+
+
+---
+
+
 ## 📝 Notes App (Flutter + Firebase)
 
 A real-time Notes Application built with **Flutter** and **Firebase**, allowing users to securely create, update, and manage their personal notes. The app uses **Firebase Authentication** for user login and **Cloud Firestore** for storing data with real-time synchronization.
