@@ -1,17 +1,19 @@
 ## 📸 Screenshots
 
-### 👨‍💻 Profile UI Design with Navigator Page also works on Drawer
+### 👨‍💻 Note App
 
 <p align="center">
-  <img src=" path " width="23%"/>
-  <img src="path" width="23%"/>
-  <img src="path" width="23%"/>
-  <img src="path" width="23%"/>
+  <img src="assets/images/outputs/splash.jpeg" width="30%"/>
+  <img src="assets/images/outputs/login.jpeg" width="30%"/>
+  <img src="assets/images/outputs/notes.jpeg" width="30%"/>
 </p>
 
+<p align="center">
+    <img src="assets/images/outputs/search.jpeg" width="33%"/>
+    <img src="assets/images/outputs/favourite.jpeg" width="33%"/>
+</p>
 
 ---
-
 
 ## 📝 Notes App (Flutter + Firebase)
 
